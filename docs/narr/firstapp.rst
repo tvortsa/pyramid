@@ -3,27 +3,27 @@
 
 .. _firstapp_chapter:
 
-Creating Your First :app:`Pyramid` Application
+Создаем ваше первое :app:`Pyramid` приложение
 ==============================================
 
-In this chapter, we will walk through the creation of a tiny :app:`Pyramid`
-application.  After we're finished creating the application, we'll explain in
-more detail how it works. It assumes you already have :app:`Pyramid` installed.
-If you do not, head over to the :ref:`installing_chapter` section.
+В этой главе, мы пробежим по созданию простого :app:`Pyramid`
+приложения. По завершении мы создадим приложение, и рассмотрим как оно работает.
+Подразумевается что вы уже установили :app:`Pyramid` .
+Если нет, посмотрите раздел :ref:`installing_chapter` .
 
 .. _helloworld_imperative:
 
 Hello World
 -----------
 
-Here's one of the very simplest :app:`Pyramid` applications:
+Это одно из самых простых приложений :app:`Pyramid` :
 
 .. literalinclude:: helloworld.py
    :linenos:
 
-When this code is inserted into a Python script named ``helloworld.py`` and
-executed by a Python interpreter which has the :app:`Pyramid` software
-installed, an HTTP server is started on TCP port 8080.
+Вставим этот код в скрипт Python с именем ``helloworld.py`` и
+и выполним интерпретатором Python где :app:`Pyramid` software
+installed, как HTTP server стартующий на TCP порту 8080.
 
 On UNIX:
 
@@ -74,7 +74,7 @@ protocol to connect an application and a web server together.  The
 as it is shipped within the Python standard library.
 
 The script also imports the :class:`pyramid.response.Response` class for later
-use.  An instance of this class will be used to create a web response.
+use.  Экземпляр этого класса will be used to create a web response.
 
 View Callable Declarations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
