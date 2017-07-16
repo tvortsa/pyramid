@@ -1,18 +1,18 @@
 .. _quick_tutorial:
 
-==========================
-Quick Tutorial for Pyramid
-==========================
+=============================
+Ускоренное введение в Pyramid
+=============================
 
-Pyramid is a web framework for Python 2 and 3. This tutorial gives a Python
+Pyramid это web framework для Python 2 и 3. This tutorial gives a Python
 3/2-compatible, high-level tour of the major features.
 
-This hands-on tutorial covers "a little about a lot": practical introductions
-to the most common facilities. Fun, fast-paced, and most certainly not aimed at
+This hands-on tutorial covers "a little about a lot": практическое введение
+в наиболее распространенные функции. Fun, fast-paced, and most certainly not aimed at
 experts of the Pyramid web framework.
 
-Contents
-========
+Содержание
+==========
 
 .. toctree::
     :maxdepth: 1
