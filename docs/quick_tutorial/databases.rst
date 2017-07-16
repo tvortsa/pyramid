@@ -1,10 +1,10 @@
 .. _qtut_databases:
 
 ==============================
-19: Databases Using SQLAlchemy
+19: База данных с SQLAlchemy
 ==============================
 
-Store and retrieve data using the SQLAlchemy ORM atop the SQLite database.
+Сохранение и извлечение данных в SQLAlchemy ORM поверх SQLite database.
 
 
 Background
@@ -27,67 +27,65 @@ storage and retrieval for the wiki pages in the previous step.
     it up ourselves.
 
 
-Objectives
+Цели
 ==========
 
-- Store pages in SQLite by using SQLAlchemy models.
+- Сохранить страницы в SQLite используя модели SQLAlchemy.
 
-- Use SQLAlchemy queries to list/add/view/edit pages.
+- Использовать SQLAlchemy запросы для list/add/view/edit страниц.
 
-- Provide a database-initialize command by writing a Pyramid *console script*
-  which can be run from the command line.
+- Предоставить database-initialize команду написав Pyramid *console script*
+  который может быть запущен из командной строки.
 
 
-Steps
+Шаги
 =====
 
-#. We are going to use the forms step as our starting point:
+#. Мы будем использовать шаг формы в качестве отправной точки:
 
    .. code-block:: bash
 
     $ cd ..; cp -r forms databases; cd databases
 
-#. We need to add some dependencies in ``databases/setup.py`` as well as an
-   "entry point" for the command-line script:
+#. Нам нужно добавить немного зависимостей в ``databases/setup.py`` а также
+   "точку входа" для command-line скрипта:
 
    .. literalinclude:: databases/setup.py
     :linenos:
 
    .. note::
 
-     We aren't yet doing ``$VENV/bin/pip install -e .`` as we will change it
-     later.
+     Мы еще не делаем ``$VENV/bin/pip install -e .`` поскольку изменим его позже.
 
-#. Our configuration file at ``databases/development.ini`` wires together some
-   new pieces:
+#. Наш файл конфигурации в ``databases/development.ini`` связывает вместе несколько новых фрагментов:
 
    .. literalinclude:: databases/development.ini
     :language: ini
 
-#. This engine configuration now needs to be read into the application through
-   changes in ``databases/tutorial/__init__.py``:
+#. Эта конфигурация движка должна быть считана теперь в приложение через
+   изменения в ``databases/tutorial/__init__.py``:
 
    .. literalinclude:: databases/tutorial/__init__.py
     :linenos:
 
-#. Make a command-line script at ``databases/tutorial/initialize_db.py`` to
-   initialize the database:
+#. Создадим command-line скрипт в ``databases/tutorial/initialize_db.py`` 
+для инициализации БД:
 
    .. literalinclude:: databases/tutorial/initialize_db.py
     :linenos:
 
-#. Since ``setup.py`` changed, we now run it:
+#. Поскольку ``setup.py`` изменен, мы запускаем его теперь:
 
    .. code-block:: bash
 
     $ $VENV/bin/pip install -e .
 
-#. The script references some models in ``databases/tutorial/models.py``:
+#. Скрипт ссылается на некоторые модели в ``databases/tutorial/models.py``:
 
    .. literalinclude:: databases/tutorial/models.py
     :linenos:
 
-#. Let's run this console script, thus producing our database and table:
+#. Запустим этот консольный скрипт, что создаст нашу БД и таблицы:
 
    .. code-block:: bash
 
@@ -116,7 +114,7 @@ Steps
     2016-04-16 13:01:33,063 INFO  [sqlalchemy.engine.base.Engine][MainThread] ('Root', '<p>Root</p>')
     2016-04-16 13:01:33,063 INFO  [sqlalchemy.engine.base.Engine][MainThread] COMMIT
 
-#. With our data now driven by SQLAlchemy queries, we need to update our
+#. Теперь наши данные управляются SQLAlchemy запросами, нам нужно обновить наш
    ``databases/tutorial/views.py``:
 
    .. literalinclude:: databases/tutorial/views.py
@@ -136,16 +134,16 @@ Steps
     ..
     2 passed in 1.41 seconds
 
-#. Run your Pyramid application with:
+#. Запустите ваше Pyramid приложение с помощью:
 
    .. code-block:: bash
 
     $ $VENV/bin/pserve development.ini --reload
 
-#. Open http://localhost:6543/ in a browser.
+#. Откройте http://localhost:6543/ в браузере.
 
 
-Analysis
+Анализ
 ========
 
 Let's start with the dependencies. We made the decision to use ``SQLAlchemy``
