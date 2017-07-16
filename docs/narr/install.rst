@@ -1,21 +1,20 @@
 .. _installing_chapter:
 
-Installing :app:`Pyramid`
+Установка :app:`Pyramid`
 =========================
 
 .. note::
 
-    This installation guide emphasizes the use of Python 3.4 and greater for
-    simplicity.
+    В этом руководстве по установке используется Python 3.4 и выше.
 
 
 .. index::
    single: install preparation
 
-Before You Install Pyramid
+Перед установкой Pyramid
 --------------------------
 
-Install Python version 3.4 or greater for your operating system, and satisfy
+Установите Python версии 3.4 или выше, and satisfy
 the :ref:`requirements-for-installing-packages`, as described in
 the following sections.
 
@@ -147,13 +146,13 @@ following options:
 
 .. _requirements-for-installing-packages:
 
-Requirements for Installing Packages
+Пакеты необходимые для установки
 ------------------------------------
 
-Use :term:`pip` for installing packages and ``python3 -m venv env`` for
-creating a virtual environment. A virtual environment is a semi-isolated Python
-environment that allows packages to be installed for use by a particular
-application, rather than being installed system wide.
+Используйте :term:`pip` для установки пакетов и ``python3 -m venv env`` для 
+создания виртуального окружения. Виртуальное окружение это полу-изолированное
+Python окружение которое позволяет установку пакетов для использования
+конкретным приложением, а не устанавливать во всю систему.
 
 .. seealso:: See the Python Packaging Authority's (PyPA) documention
    `Requirements for Installing Packages
@@ -170,11 +169,11 @@ application, rather than being installed system wide.
 Installing :app:`Pyramid` on a UNIX System
 ------------------------------------------
 
-After installing Python as described previously in :ref:`for-mac-os-x-users` or
-:ref:`if-you-don-t-yet-have-a-python-interpreter-unix`, and satisfying the
-:ref:`requirements-for-installing-packages`, you can now install Pyramid.
+После установки Python as described previously in :ref:`for-mac-os-x-users` or
+:ref:`if-you-don-t-yet-have-a-python-interpreter-unix`, и выполнения
+:ref:`requirements-for-installing-packages`, вы можете установить Pyramid.
 
-#. Make a :term:`virtual environment` workspace:
+#. Создайте :term:`virtual environment` рабочее пространство:
 
    .. code-block:: bash
 
@@ -200,11 +199,11 @@ After installing Python as described previously in :ref:`for-mac-os-x-users` or
 
 .. _venv-bin-pip-vs-source-bin-activate:
 
-.. note:: Why use ``$VENV/bin/pip`` instead of ``source bin/activate``, then
+.. note:: Зачем использовать ``$VENV/bin/pip`` вместо ``source bin/activate``, then
    ``pip``?
 
-   ``$VENV/bin/pip`` clearly specifies that ``pip`` is run from within the
-   virtual environment and not at the system level.
+   ``$VENV/bin/pip`` четко указывает что ``pip`` запущен в
+   virtual environment а не на уровне системы.
 
    ``activate`` makes changes to the user's shell environment which can often be convenient. However, in the context of long-form documentation, environment configuration can easily be forgotten. By keeping each snippet explicit we can reduce copy / paste errors by users in which commands are executed against the wrong Python environment. Also, ``deactivate`` might not correctly restore previous shell environment variables. Avoiding ``activate`` keeps the environment more reproducible.
 
@@ -256,11 +255,11 @@ After installing Python as described previously in
    bin/activate, then pip <venv-bin-pip-vs-source-bin-activate>`.
 
 
-What Gets Installed
--------------------
+Что устанавливается?
+--------------------
 
-When you install :app:`Pyramid`, various libraries such as WebOb, PasteDeploy,
-and others are installed.
+Устанавливая :app:`Pyramid`, устанавливаются различные библиотеки типа WebOb, PasteDeploy,
+и другие.
 
 Additionally, as chronicled in :ref:`project_narr`, :term:`cookiecutter`\ s will be
 used, which make it easy to start a new :app:`Pyramid` project.
