@@ -1,30 +1,30 @@
 .. _qtut_cookiecutters:
 
 =================================================
-Prelude: Quick Project Startup with Cookiecutters
+Прелюдия: Быстрый старт проекта с Cookiecutters
 =================================================
 
-To ease the process of getting started on a project, the Pylons Project provides :term:`cookiecutter`\ s that generate sample :app:`Pyramid` projects from project templates. These cookiecutters will install :app:`Pyramid` and its dependencies as well. We will still cover many topics of web application development using :app:`Pyramid`, but it's good to know of this facility. This prelude will demonstrate how to get a working :app:`Pyramid` web application running via ``cookiecutter``.
+Чтобы упростить процесс запуска проекта, Pylons Project предоставляет :term:`cookiecutter`\ который генерирует простые :app:`Pyramid` проекты по шаблонам проектов. Эти cookiecutters устанавливают :app:`Pyramid` и его зависимости. Мы по-прежнему будем охватывать многие темы разработки веб-приложений, используя :app:`Pyramid`, но хорошо знать его возможности. Эта прелюдия демонстрирует как запустить проект :app:`Pyramid` web приложения используя ``cookiecutter``.
 
 
-Objectives
+Цели
 ==========
 
-- Use a cookiecutter to make a new project.
+- Использовать cookiecutter для создания нового проекта.
 
-- Start up a :app:`Pyramid` application and visit it in a web browser.
+- Запустить приложение :app:`Pyramid` и посетить его web браузером.
 
 
-Steps
+Шаги
 =====
 
-#.  Install cookiecutter into your virtual environment.
+#.  Установите cookiecutter в virtual environment.
 
     .. code-block:: bash
 
         $VENV/bin/pip install cookiecutter
 
-#.  Let's use the cookiecutter ``pyramid-cookiecutter-starter`` to create a starter :app:`Pyramid` project in the current directory, entering values at the prompts as shown below for the following command.
+#.  Используем cookiecutter ``pyramid-cookiecutter-starter`` для создания стартового проекта :app:`Pyramid` в текущей папке, entering values at the prompts as shown below for the following command.
 
     .. code-block:: bash
 
@@ -34,8 +34,8 @@ Steps
 
     .. code-block:: text
 
-        You've cloned ~/.cookiecutters/pyramid-cookiecutter-starter before.
-        Is it okay to delete and re-clone it? [yes]: yes
+        Вы клонировали ~/.cookiecutters/pyramid-cookiecutter-starter прежде.
+        Удалить и переклонировать это? [yes]: yes
         project_name [Pyramid Scaffold]: cc_starter
         repo_name [cc_starter]: cc_starter
         Select template_language:
@@ -57,14 +57,14 @@ Steps
         # ...and into which we install our project.
         $ env/bin/pip install -e .
 
-#.  Start up the application by pointing :app:`Pyramid`'s ``pserve`` command at the
+#.  Запуск приложения с помощью :app:`Pyramid`'s ``pserve`` команды at the
     project's (generated) configuration file:
 
     .. code-block:: bash
 
         $ env/bin/pserve development.ini --reload
 
-    On start up, ``pserve`` logs some output:
+    На старте, ``pserve`` логирует некоторый вывод:
 
     .. code-block:: text
 
@@ -73,10 +73,10 @@ Steps
         Serving on http://localhost:6543
         Serving on http://localhost:6543
 
-#. Open http://localhost:6543/ in your browser.
+#. Откройте http://localhost:6543/ в вашем браузере.
 
-Analysis
-========
+Анализ
+=======
 
 Rather than starting from scratch, a cookiecutter can make it easy to get a Python
 project containing a working :app:`Pyramid` application. The Pylons Project provides `several cookiecutters <https://github.com/Pylons?q=pyramid-cookiecutter>`_.
