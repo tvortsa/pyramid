@@ -6,18 +6,18 @@
    single: frameworks vs. libraries
    single: framework
 
-:app:`Pyramid` Introduction
+:app:`Pyramid` Введение
 ===========================
 
-:app:`Pyramid` is a Python web application *framework*. It is designed to make creating web applications easier. It is open source.
+:app:`Pyramid` это Python web приложение *framework*. Он разработан так чтобы упростить создание web приложений. Он open source.
 
-.. sidebar:: What Is a Framework?
+.. sidebar:: Что такое Framework?
 
-   A *framework* provides capabilities that developers can enhance or extend. A web application framework provides many of the common needs of building web applications allowing developers to concentrate only on the parts that are specific to their application.
+   *framework* предоставляет возможности, которые разработчики могут улучшить или расширить. Web application framework предоставляет множество общих потребностей при построении web приложений allowing developers to concentrate only on the parts that are specific to their application.
 
    Every framework makes choices about how a particular problem should be solved. When developers choose to use a framework, they cede control over the portions of their application that are provided by the framework. It is possible to write a complete web application without any framework, by using Python libraries. In practice, however, it is often more practical to use a framework, so long as your chosen framework fits the requirements of your application.
 
-:app:`Pyramid` follows these design and engineering principles:
+:app:`Pyramid` придерживается следующих дизацнерских и инженерных принципов:
 
 Simplicity
    :app:`Pyramid` is designed to be easy to use. You can get started even if you don't understand it all. And when you're ready to do more, :app:`Pyramid` will be there for you.
@@ -39,8 +39,8 @@ Openness
 
 .. _why_pyramid:
 
-Why Pyramid?
-------------
+почему Pyramid?
+---------------
 
 In a world filled with web frameworks, why should you choose :app:`Pyramid`\ ?
 
@@ -74,8 +74,8 @@ You can get help quickly with :app:`Pyramid`. It's our goal that no :app:`Pyrami
 
 .. _what_makes_pyramid_unique:
 
-What makes Pyramid unique
--------------------------
+Что делает Pyramid уникальным
+-----------------------------
 
 There are many tools available for web development. What would make someone want to use :app:`Pyramid` instead?  What makes :app:`Pyramid` unique?
 
@@ -86,8 +86,8 @@ We don't believe you should have to make this choice. You can't really know how 
 :app:`Pyramid` provides a set of features that are unique among Python web frameworks. Others may provide some, but only :app:`Pyramid` provides them all, in one place, fully documented, and *à la carte* without needing to pay for the whole banquet.
 
 
-Build single-file applications
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Построение одно-файлового приложеия
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can write a :app:`Pyramid` application that lives entirely in one Python file. Such an application is easy to understand since everything is in one place. It is easy to deploy because you don't need to know much about Python packaging. :app:`Pyramid` allows you to do almost everything that so-called *microframeworks* can in very similar ways.
 
@@ -120,16 +120,16 @@ However, using :app:`Pyramid` configuration decorators does not change your code
 Generate application URLs
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dynamic web applications produce URLs that can change depending on what you are viewing. :app:`Pyramid` provides flexible, consistent, easy to use tools for generating URLs. When you use these tools to write your application, you can change your configuration without fear of breaking links in your web pages.
+Динамические web приложения генерируют URLы которые могут изменяться в зависимости от того что вы просматриваете. :app:`Pyramid` предоставляет гибкий, последовательный, простой в использовании инструмент генерации URLs. Используя который, вы можете менять вашу конфигурацию не боясь нарушить ссылки на веб-страницах.
 
 .. seealso::
 
     See also :ref:`generating_route_urls`.
 
-Serve static assets
+Статические активы
 ~~~~~~~~~~~~~~~~~~~
 
-Web applications often require JavaScript, CSS, images and other so-called *static assets*. :app:`Pyramid` provides flexible tools for serving these kinds of files. You can serve them directly from :app:`Pyramid`, or host them on an external server or CDN (content delivery network). Either way, :app:`Pyramid` can help you to generate URLs so you can change where your files come from without changing any code.
+Web часто требуют JavaScript, CSS, images и проч. так называемых *статических активов*. :app:`Pyramid` предоставляет гибкий инструментарий для обслуживания этого типа файлов. Вы можете обслуживать их напрямую из :app:`Pyramid`, или хостить их на внешнем сервере или CDN (content delivery network). Either way, :app:`Pyramid` can help you to generate URLs so you can change where your files come from without changing any code.
 
 .. seealso::
 
@@ -175,10 +175,10 @@ Supported :app:`Pyramid` add-ons are held to the same demanding standards as the
 
     See also https://trypyramid.com/resources-extending-pyramid.html
 
-Write your views, *your* way
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Написание ваших видов, *вашим* способом
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A fundamental task for any framework is to map URLs to code. In :app:`Pyramid`, that code is called a :term:`view callable`. View callables can be functions, class methods or even callable class instances. You are free to choose the approach that best fits your use case. Regardless of your choice, :app:`Pyramid` treats them the same. You can change your mind at any time without any penalty. There are no artificial distinctions between the various approaches.
+Фундаментальная задача для любого фрэймворка отображение URLs на код. В :app:`Pyramid`, этот код называется :term:`view callable`. View callables могут быть функциями, методами класса или даже экземплярами callable сласса. You are free to choose the approach that best fits your use case. Regardless of your choice, :app:`Pyramid` treats them the same. You can change your mind at any time without any penalty. There are no artificial distinctions between the various approaches.
 
 Here's a view callable defined as a function:
 
@@ -218,12 +218,12 @@ Here's a few views defined as methods of a class instead:
 
 .. _intro_asset_specs:
 
-Find *your* static assets
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Поиск *ваших* статических активов
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In many web frameworks, the static assets required by an application are kept in a globally shared location, "the *static* directory". Others use a lookup scheme, like an ordered set of template directories. Both of these approaches have problems when it comes to customization.
+Во многих web frameworks, статические активы требуемые приложению, хранятся в глобальном общем месте, "папке *static* ". Другие используют lookup scheme, как упорядоченный набор шаблонных каталогов. Оба эти подхода имеют проблемы, когда дело доходит до настройки.
 
-:app:`Pyramid` takes a different approach. Static assets are located using *asset specifications*, strings that contain reference both to a Python package name and a file or directory name, e.g. ``MyPackage:static/index.html``. These specifications are used for templates, JavaScript and CSS, translation files, and any other package-bound static resource. By using asset specifications, :app:`Pyramid` makes it easy to extend your application with other packages without worrying about conflicts.
+:app:`Pyramid` использует другой подход. Static assets are located using *asset specifications*, strings that contain reference both to a Python package name and a file or directory name, e.g. ``MyPackage:static/index.html``. These specifications are used for templates, JavaScript and CSS, translation files, and any other package-bound static resource. By using asset specifications, :app:`Pyramid` makes it easy to extend your application with other packages without worrying about conflicts.
 
 What happens if another :app:`Pyramid` package you are using provides an asset you need to customize? Maybe that page template needs better HTML, or you want to update some CSS. With asset specifications you can override the assets from other packages using simple wrappers.
 
@@ -277,8 +277,8 @@ The string passed as ``renderer=`` above is an :term:`asset specification`. Asse
 
 Example: :ref:`renderers_chapter`.
 
-Use events to coordinate actions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Использование событий для координирования действий
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When writing web applications, it is often important to have your code run at a specific point in the lifecycle of a request. In :app:`Pyramid`, you can accomplish this using *subscribers* and *events*.
 
