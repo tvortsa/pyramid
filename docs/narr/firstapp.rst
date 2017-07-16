@@ -21,93 +21,90 @@ Hello World
 .. literalinclude:: helloworld.py
    :linenos:
 
-Вставим этот код в скрипт Python с именем ``helloworld.py`` и
-и выполним интерпретатором Python где :app:`Pyramid` software
-installed, как HTTP server стартующий на TCP порту 8080.
+Вставим этот код в скрипт Python с именем ``helloworld.py`` 
+и выполним интерпретатором Python где :app:`Pyramid` установленный
+софт, как HTTP server стартующий на TCP порту 8080.
 
-On UNIX:
+Для UNIX:
 
 .. code-block:: bash
 
    $ $VENV/bin/python helloworld.py
 
-On Windows:
+Для Windows:
 
 .. code-block:: doscon
 
    c:\> %VENV%\Scripts\python helloworld.py
 
-This command will not return and nothing will be printed to the console. When
-port 8080 is visited by a browser on the URL ``/hello/world``, the server will
-simply serve up the text "Hello world!".  If your application is running on
-your local system, using `<http://localhost:8080/hello/world>`_ in a browser
-will show this result.
+Эта команда ничего не возвращает и не выводит в консоль. Когда вы посетите порт
+ 8080 браузером по URL ``/hello/world``, сервер просто обслужит выведя текст
+"Hello world!". Если ваше приложение запущено локально, используйте
+`<http://localhost:8080/hello/world>`_ в браузере чтобы отобразить результат.
 
-Each time you visit a URL served by the application in a browser, a logging
-line will be emitted to the console displaying the hostname, the date, the
-request method and path, and some additional information.  This output is done
-by the wsgiref server we've used to serve this application.  It logs an "access
-log" in Apache combined logging format to the console.
+Каждый раз когда вы переходите по URL обслуживается приложением в браузере, в консоль
+выводится строка логирования с именем хоста, датой, временем, типом запроса и путем
+и доп. инф.  Этот вывод делает wsgiref сервер который вы используете для работы приложения.
+Это лог "access log" из Apache совмещающий logging формат в консоли.
 
-Press ``Ctrl-C`` (or ``Ctrl-Break`` on Windows) to stop the application.
+Нажмите ``Ctrl-C`` (или ``Ctrl-Break`` в Windows) чтобыостановить приложение.
 
-Now that we have a rudimentary understanding of what the application does,
-let's examine it piece by piece.
+Теперь мы имеем начальные представления о том как работает приложение,
+давайте разберем по кусочкам.
 
 Imports
 ~~~~~~~
 
-The above ``helloworld.py`` script uses the following set of import statements:
+Скрипт ``helloworld.py`` использует следующий набор операторов импорта:
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :lines: 1-3
 
-The script imports the :class:`~pyramid.config.Configurator` class from the
-:mod:`pyramid.config` module.  An instance of the
-:class:`~pyramid.config.Configurator` class is later used to configure your
-:app:`Pyramid` application.
+Скрипт импортирует :class:`~pyramid.config.Configurator` из модуля
+:mod:`pyramid.config`.  Экземпляр класса
+:class:`~pyramid.config.Configurator` в последствии используется для конфигурации
+:app:`Pyramid` приложения.
 
-Like many other Python web frameworks, :app:`Pyramid` uses the :term:`WSGI`
-protocol to connect an application and a web server together.  The
-:mod:`wsgiref` server is used in this example as a WSGI server for convenience,
-as it is shipped within the Python standard library.
+Как и в других Python web фрэймворках, :app:`Pyramid` использует :term:`WSGI`
+протокол для соединения приложения и web сервера вместе. Сервер
+:mod:`wsgiref` используется в этом примере как WSGI сервер для удобства,
+поскольку поставляется в стандартной библиотеке Python.
 
-The script also imports the :class:`pyramid.response.Response` class for later
-use.  Экземпляр этого класса will be used to create a web response.
+Этот скрипт также импортирует класс :class:`pyramid.response.Response` для
+последующего использования. Экземпляр этого класса будет использован для создания
+web-ответа.
 
-View Callable Declarations
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Объявление вызываемого вида (View Callable Declarations)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The above script, beneath its set of imports, defines a function named
+После операторов импорта, следует функция
 ``hello_world``.
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :pyobject: hello_world
 
-The function accepts a single argument (``request``) and it returns an instance
-of the :class:`pyramid.response.Response` class.  The single argument to the
-class' constructor is a string computed from parameters matched from the URL. 
-This value becomes the body of the response.
+Функция принимает один аргумент (``request``) и он возвращает экземпляр
+класса :class:`pyramid.response.Response`.  Единственный аргумент в конструкторе
+класса (class' constructor) это строка вычисленная из parameters matched в URL. 
+Это значение становится телом ответа.
 
-This function is known as a :term:`view callable`.  A view callable accepts a
-single argument, ``request``.  It is expected to return a :term:`response`
-object.  A view callable doesn't need to be a function; it can be represented
-via another type of object, like a class or an instance, but for our purposes
-here, a function serves us well.
+Эту функцию называют :term:`view callable`.  View callable принимает один аргумент,
+``request``.  Ожидается что это объект :term:`response`. 
+View callable не обязан быть функцией; она может быть представлена
+через другой тип объекта, класс или экземпляр, но для наших целей функция подходит лучше.
 
-A view callable is always called with a :term:`request` object.  A request
-object is a representation of an HTTP request sent to :app:`Pyramid` via the
-active :term:`WSGI` server.
+View callable всегда вызывается с объектом :term:`request`.  Объект request
+прдставляет HTTP запрос посланный в приложение :app:`Pyramid` через активный :term:`WSGI` сервер.
 
-A view callable is required to return a :term:`response` object because a
-response object has all the information necessary to formulate an actual HTTP
-response; this object is then converted to text by the :term:`WSGI` server
-which called Pyramid and it is sent back to the requesting browser.  To return
-a response, each view callable creates an instance of the
-:class:`~pyramid.response.Response` class.  In the ``hello_world`` function, a
-string is passed as the body to the response.
+View callable должен вернуть объект :term:`response` потому что объект response
+обладает всей необходимой информацией для формирования актуального HTTP ответа;
+Этот объект конвертируется в текст сервером :term:`WSGI` 
+который вызывает Pyramid и этот объект возвращается в вызывающий браузер.
+Возвращая ответ, каждый view callable creatсоздает экземпляр класса
+:class:`~pyramid.response.Response`.  В функции ``hello_world``, строка передается
+как тело для ответа.
 
 .. index::
    single: imperative configuration
@@ -116,123 +113,118 @@ string is passed as the body to the response.
 
 .. _helloworld_imperative_appconfig:
 
-Application Configuration
+Конфигурация приложения
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the above script, the following code represents the *configuration* of this
-simple application. The application is configured using the previously defined
-imports and function definitions, placed within the confines of an ``if``
-statement:
+В скрипте, следующий код представляет *конфигурацию* этого простого приложения.
+Приложение конфигурировано с использованием прежде объявленных операторов импорта
+и функции definitions, размещенных в операторе ``if``:
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :lines: 9-15
 
-Let's break this down piece by piece.
+Разберем это по частям.
 
-Configurator Construction
+Конструкция конфигуратора
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :lines: 9-10
 
-The ``if __name__ == '__main__':`` line in the code sample above represents a
-Python idiom: the code inside this if clause is not invoked unless the script
-containing this code is run directly from the operating system command line.
-For example, if the file named ``helloworld.py`` contains the entire script
-body, the code within the ``if`` statement will only be invoked when ``python
-helloworld.py`` is executed from the command line.
+Строка ``if __name__ == '__main__':`` представляет идиому Python:
+код внутри выражения if не вызывается если не вызывается, если скрипт 
+содержащий этот код, запускается непосредственно из командной строки операционной системы.
+Например, если файл ``helloworld.py`` содержит все тело скрипта, код в выражении ``if``
+вызывается только если ``python helloworld.py`` выполнялся из командной строки.
 
-Using the ``if`` clause is necessary—or at least best practice—because code in
-a Python ``.py`` file may be eventually imported via the Python ``import``
-statement by another ``.py`` file.  ``.py`` files that are imported by other
-``.py`` files are referred to as *modules*.  By using the ``if __name__ ==
-'__main__':`` idiom, the script above is indicating that it does not want the
-code within the ``if`` statement to execute if this module is imported from
-another; the code within the ``if`` block should only be run during a direct
-script execution.
+Использование условия ``if`` необходимая или по-крайней мере лучшая практика
+поскольку код Python в ``.py`` файлах может импортироваться опреатором Python ``import``
+в другой ``.py`` файл который называют *modules*.  Используя идиому ``if __name__ ==
+'__main__':`` , скрипт определяет что код в выражении ``if`` не должен выполняться
+если этот модуль импортирован из другого; код в блоке ``if`` должен запускаться только
+если скрипт был запущен непосредственно.
 
-The ``with Configurator() as config:`` line above creates an instance of the
-:class:`~pyramid.config.Configurator` class using a :term:`context manager`.  The resulting ``config`` object
-represents an API which the script uses to configure this particular
-:app:`Pyramid` application.  Methods called on the Configurator will cause
-registrations to be made in an :term:`application registry` associated with the
-application.
+Строка ``with Configurator() as config:`` создает экземпляр класса
+:class:`~pyramid.config.Configurator` используя :term:`context manager`.  
+Итоговый объект ``config`` представляет API которое скрипт использует для конфигурирования
+этой части :app:`Pyramid` приложения. Методы, вызванные конфигуратором приведут к регистрации
+в :term:`application registry` ассоциированными с приложением.
 
 .. _adding_configuration:
 
-Adding Configuration
-~~~~~~~~~~~~~~~~~~~~
+Добавление конфигурации
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :lines: 11-12
 
-The first line above calls the :meth:`pyramid.config.Configurator.add_route`
-method, which registers a :term:`route` to match any URL path that begins with
+Первая строка тут вызывает метод :meth:`pyramid.config.Configurator.add_route`
+, который регистрирует :term:`route` в сопоставление пути URL который начинается на
 ``/hello/`` followed by a string.
 
-The second line registers the ``hello_world`` function as a :term:`view
-callable` and makes sure that it will be called when the ``hello`` route is
-matched.
+Ворая строка регистрирует функцию ``hello_world`` как :term:`view
+callable` и убеждается чтобы онбыл вызван когда роут ``hello`` совпадает.
 
 .. index::
    single: make_wsgi_app
    single: WSGI application
 
-WSGI Application Creation
+Создание WSGI приложения
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :lines: 13
 
-After configuring views and ending configuration, the script creates a WSGI
-*application* via the :meth:`pyramid.config.Configurator.make_wsgi_app` method.
-A call to ``make_wsgi_app`` implies that all configuration is finished
-(meaning all method calls to the configurator, which sets up views and various
-other configuration settings, have been performed).  The ``make_wsgi_app``
-method returns a :term:`WSGI` application object that can be used by any WSGI
-server to present an application to a requestor. :term:`WSGI` is a protocol
-that allows servers to talk to Python applications.  We don't discuss
-:term:`WSGI` in any depth within this book, but you can learn more about it by
-reading its `documentation <https://wsgi.readthedocs.io/en/latest/>`_.
+После конфигурирования видов и завершения конфигурации, скрипт создает WSGI
+*application* методом :meth:`pyramid.config.Configurator.make_wsgi_app`.
+Вызов ``make_wsgi_app`` подразумевает что вся конфигурация завершена
+(тоесть все методы для конфигуратора , которые настраивают виды
+и другие настройки, были выполнены).  Метод ``make_wsgi_app``
+возвращает объект приложения :term:`WSGI` который может быть использован
+любым WSGI сервером для представления приложения в requestor. :term:`WSGI`
+это протокол который позволяет серверу to talk to Python applications. 
+Мы не касаемся :term:`WSGI` в этой книге, но вы можете узнать о нем из
+документации `documentation <https://wsgi.readthedocs.io/en/latest/>`_.
 
-The :app:`Pyramid` application object, in particular, is an instance of a class
-representing a :app:`Pyramid` :term:`router`.  It has a reference to the
+Объект приложения :app:`Pyramid`, в частности, является экземпляром класса
+представляющего :app:`Pyramid` :term:`router`.  Он имеет ссылку на
 :term:`application registry` which resulted from method calls to the
-configurator used to configure it.  The :term:`router` consults the registry to
+configurator used to configure it.  Роутер :term:`router` consults the registry to
 obey the policy choices made by a single application.  These policy choices
 were informed by method calls to the :term:`Configurator` made earlier; in our
 case, the only policy choices made were implied by calls to its ``add_view``
 and ``add_route`` methods.
 
-WSGI Application Serving
-~~~~~~~~~~~~~~~~~~~~~~~~
+Обслуживание WSGI приложений
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. literalinclude:: helloworld.py
    :lineno-match:
    :lines: 14-15
 
-Finally, we actually serve the application to requestors by starting up a WSGI
-server.  We happen to use the :mod:`wsgiref` ``make_server`` server maker for
-this purpose.  We pass in as the first argument ``'0.0.0.0'``, which means
-"listen on all TCP interfaces".  By default, the HTTP server listens only on
-the ``127.0.0.1`` interface, which is problematic if you're running the server
-on a remote system and you wish to access it with a web browser from a local
-system.  We also specify a TCP port number to listen on, which is 8080, passing
-it as the second argument.  The final argument is the ``app`` object (a
-:term:`router`), which is the application we wish to serve.  Finally, we call
-the server's ``serve_forever`` method, which starts the main loop in which it
-will wait for requests from the outside world.
+Наконец, действительно подаем запрос на обслуживание запуском WSGI
+сервера.  Для чего используем :mod:`wsgiref` ``make_server`` для создания сервера.
+Мы передаем в качестве первого аргумента ``'0.0.0.0'``, что означает
+"прослушивать все TCP интерфейсы".  По умолчанию, HTTP сервер слушает только
+интерфейс ``127.0.0.1`` , что проблематично если вы запускаете сервер на удаленной
+системе и хотите получить к нему доступ web браузером через локальную систему.
+Мы также указываем номер TCP порта для прослушивания, передавая 8080, 
+в качестве второго аргумента. 
+Последний аргумент это объект ``app`` (:term:`router`), который является приложением
+которое мы хотим обслуживать.  
+Наконец мы вызываем метод сервера ``serve_forever``, который запускает главный цикл 
+который будет ожидать запросы из внешнего мира.
 
-When this line is invoked, it causes the server to start listening on TCP port
-8080.  The server will serve requests forever, or at least until we stop it by
-killing the process which runs it (usually by pressing ``Ctrl-C`` or
-``Ctrl-Break`` in the terminal we used to start it).
+Когда эта строка вызывается, тогда сервер начинает прослушивание TCP порта 8080.
+Сервер будет обрабатывать запросы все время, пока мы не остановим его
+убивая процесс который его запускает (обычно нажатием ``Ctrl-C`` или
+``Ctrl-Break`` в котором мы его запускали).
 
-Conclusion
+Заключение
 ~~~~~~~~~~
 
 Our hello world application is one of the simplest possible :app:`Pyramid`
