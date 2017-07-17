@@ -77,7 +77,7 @@ You can get help quickly with :app:`Pyramid`. It's our goal that no :app:`Pyrami
 Что делает Pyramid уникальным
 -----------------------------
 
-There are many tools available for web development. What would make someone want to use :app:`Pyramid` instead?  What makes :app:`Pyramid` unique?
+Существует множество инструментов для веб-разработки. Зачем бы кто-то захотел использовать :app:`Pyramid` ?  Что делает :app:`Pyramid` уникальным?
 
 C :app:`Pyramid` вы можете создавать очень маленькие приложения не требующие больших знаний. Узнав немного больше, вы сможете писать и очень большие приложения тоже. :app:`Pyramid` позволит вам быстро стать продуктивным, и будет расти вместе с вами. Он не будет удерживать вас, когда ваше приложение будет небольшим, И он не будет мешать вам, когда ваше приложение станет большим. Остальные фрэймворки, похоже, попадают в две неперекрывающиеся категории: которые поддерживают "маленькие приложения" и те что разработаны под "большие приложения".
 
@@ -325,28 +325,28 @@ The :app:`Pyramid` core is fast. It has been engineered from the ground up for s
 
 Example: https://blog.curiasolutions.com/pages/the-great-web-framework-shootout.html
 
-Store session data
-~~~~~~~~~~~~~~~~~~
-
-:app:`Pyramid` has built-in support for HTTP sessions, so you can associate data with specific users between requests. Lots of other frameworks also support sessions. But :app:`Pyramid` allows you to plug in your own custom sessioning system. So long as your system conforms to a documented interface, you can drop it in in place of the provided system.
-
-Currently there is a binding package for the third-party Redis sessioning system that does exactly this. But if you have a specialized need (perhaps you want to store your session data in MongoDB), you can.  You can even switch between implementations without changing your application code.
-
-Example: :ref:`sessions_chapter`.
-
-Handle problems with grace
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Mistakes happen. Problems crop up. No one writes bug-free code. :app:`Pyramid`provides a way to handle the exceptions your code encounters. An :term:`exception view` is a special kind of view which is automatically called when a particular exception type arises without being handled by your application.
-
-For example, you might register an exception view for the :exc:`Exception` exception type, which will catch *all* exceptions, and present a pretty "well, this is embarrassing" page.  Or you might choose to register an exception view for only certain application-specific exceptions. You can make one for when a file is not found, or when the user doesn't have permission to do something. In the former case, you can show a pretty "Not Found" page; in the latter case you might show a login form.
-
-Example: :ref:`exception_views`.
-
-And much, much more...
+Хранение данных сессии
 ~~~~~~~~~~~~~~~~~~~~~~
 
-:app:`Pyramid` has been built with a number of other sophisticated design features that make it adaptable. Read more about them below.
+:app:`Pyramid` имеет встроенную поддержку HTTP сессий, поэтому вы можете ассоциировать данные с конкретными пользователями между запросами. Многие другие фрэймворки также поддерживают сеансы. Но :app:`Pyramid` позволяет подключать произвольную систему сессий. Пока ваша система соответствует документированному интерфейсу, вы можете оставить ее вместо предоставленной системы.
+
+В настоящее время существует пакет привязки для сторонней системы Redis для сеансов, которая выполняет именно это. But if you have a specialized need (perhaps you want to store your session data in MongoDB), you can.  You can even switch between implementations without changing your application code.
+
+Пример: :ref:`sessions_chapter`.
+
+Управлять проблемами изящно
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Никто не создает безошибочный код. :app:`Pyramid` предоставляет способ обработки исключений, с которыми сталкивается ваш код. Так :term:`exception view` это особый случай view который автоматически вызывается, когда возникает особый тип исключения, не обрабатываясь приложением.
+
+Например, вы можете зарегистрировать exception view для :exc:`Exception` exception type, оторый поймает * все * исключения, и представит симпатичную страницу «ок, нам неловко».  Или вы можете зарегистрировать представление исключения только для определенных исключений для конкретных приложений. Вы можете сделать это, когда файл не найден или когда у пользователя нет разрешения на выполнение чего-либо. В первом случае вы можете показать красивую страницу «Не найдено»; В последнем случае вы можете указать форму входа в систему.
+
+Пример: :ref:`exception_views`.
+
+И многое, многое другое...
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:app:`Pyramid` Был построен с рядом других сложных функций дизайна, которые делают его адаптируемым. Узнайте больше о них ниже.
 
 .. toctree::
    :maxdepth: 2
