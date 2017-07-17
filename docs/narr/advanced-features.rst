@@ -1,90 +1,90 @@
-Advanced :app:`Pyramid` Design Features
+Продвинутые фичи дизайна :app:`Pyramid`
 =======================================
 
-:app:`Pyramid` has been built from the ground up to avoid the problems that other frameworks can suffer.
+:app:`Pyramid` Была построена с нуля, чтобы избежать проблем, от которых пострадали другие фрэймворки.
 
-You Don't Need Singletons
+Вам не нужны Singleton`ы
 -------------------------
 
-Have you ever struggled with parameterizing Django's ``settings.py`` file for multiple installations of the same Django application? Have you ever needed to monkey-patch a framework fixture to get it to behave properly for your use case? Have you ever tried to deploy your application using an asynchronous server and failed?
+Вы когда-нибудь боролись с параметризацией в файле Django ``settings.py`` для нескольких инсталляций одного и того же Django приложения? Have you ever needed to monkey-patch a framework fixture to get it to behave properly for your use case? Вы когда-нибудь пытались развернуть свое приложение с помощью асинхронного сервера и не смогли?
 
-All these problems are symptoms of :term:`mutable` :term:`global state`, also known as :term:`import time` :term:`side effect`\ s and arise from the use of :term:`singleton` data structures.
+Все эти проблемы являются симптомами :term:`mutable` :term:`global state`, также известного как :term:`import time` :term:`side effect`\ s и возникают из-за использования такой структуры данных как :term:`singleton`.
 
-:app:`Pyramid` is written so that you don't run into these types of problems. It is even possible to run multiple copies of the *same* :app:`Pyramid` application configured differently within a single Python process. This makes running :app:`Pyramid` in shared hosting environments a snap.
+:app:`Pyramid` написан так, что вы не сталкиваетесь с такими проблемами. Можно даже запустить несколько копий *одного и того же* :app:`Pyramid` приложения настроенное по-разному в рамках одного процесса Python. Это делаетзапуск :app:`Pyramid` в средах с общим хостингом.
 
-Simplify your View Code with Predicates
+Упростите код вида с помощью предикатов
 ---------------------------------------
 
-How many times have you found yourself beginning the logic of your view code with something like this:
+Сколько раз вы обнаруживали, что начинаете логику своего кода вида с чего-то подобного:
 
 .. code-block:: python
     :linenos:
 
     if request.user.is_authenticated:
-        # do one thing
+        # делаем одно
     else:
-        # do something else
+        # делаем другое
 
-Unlike many other systems, :app:`Pyramid` allows you to associate more than one view with a single route. For example, you can create a route with the pattern ``/items`` and when the route is matched, you can send the request to one view if the request method is GET, another view if the request method is POST, and so on.
+В отличие от многих других систем, :app:`Pyramid` позволяет связать несколько видов с одним маршрутом. Например, вы можете создать маршрут с паттерном ``/items`` и когда маршрут совпадает, Вы можете отправить запрос на один вид, если метод запроса - GET, другое представление, если метод запроса POST, и так далее.
 
-:app:`Pyramid` uses a system of :term:`view predicate`\ s to allow this. Matching the request method is one basic thing you can do with a :term:`view predicate`. You can also associate views with other request parameters, such as elements in the query string, the Accept header, whether the request is an AJAX (XHR) request or not, and lots of other things.
+:app:`Pyramid` использует систему :term:`view predicate`\ чтобы реализовать это. Согласование метода запроса - одна из основных вещей, которую вы можете сделать с помощью :term:`view predicate`. Вы также можете связывать представления с другими параметрами запроса, такими как элементы в строке запроса, заголовком Accept, является ли запрос AJAX (XHR) запросом или нет, и множеством другого.
 
-For our example above, you can do this instead:
+В нашем примере выше вы можете сделать это вместо того:
 
 .. code-block:: python
     :linenos:
 
     @view_config(route_name="items", effective_principals=pyramid.security.Authenticated)
     def auth_view(request):
-        # do one thing
+        # делаем одно
 
     @view_config(route_name="items")
     def anon_view(request):
-        # do something else
+        # делаем другое
 
-This approach allows you to develop view code that is simpler, more easily understandable, and more directly testable.
+Этот подход позволяет вам разрабатывать более простой, понятный и более понятный код вида.
 
 .. seealso::
 
    See also :ref:`view_configuration_parameters`.
 
-Stop Worrying About Transactions
---------------------------------
+Прекратите беспокоиться о транзакциях
+-------------------------------------
 
-:app:`Pyramid`\ 's :term:`cookiecutter`\ s render projects that include a *transaction management* system.  When you use this system, you can stop worrying about when to commit your changes, :app:`Pyramid` handles it for you. The system will commit at the end of a request or abort if there was an exception.
+:app:`Pyramid`\ 's :term:`cookiecutter`\ s render projects которая включает систему *transaction management*.  Когда вы используете эту систему, вы можете перестать беспокоиться о том, когда совершать изменения, :app:`Pyramid` обрабатывает его для вас. Система будет зафиксирована в конце запроса или прервана, если возникло исключение.
 
-Why is that a good thing? Imagine a situation where you manually commit a change to your persistence layer. It's very likely that other framework code will run *after* your changes are done. If an error happens in that other code, you can easily wind up with inconsistent data if you're not extremely careful.
+Почему это хорошо? Представьте ситуацию, когда вы вручную вносите изменения в свой уровень персистентности. Очень вероятно, что другой код фрэймворка будет запущен *после* того как ваши изменения закончены. Если в этом другом случае произошла ошибка, вы можете легко завершить работу с несогласованными данными, если вы не очень осторожны.
 
-Using transaction management saves you from needing to think about this. Either a request completes successfully and all changes are committed, or it does not and all changes are aborted.
+Использование управления транзакциями избавляет вас от необходимости думать об этом. Либо запрос завершается успешно, и все изменения совершаются, либо нет, и все изменения прерваны.
 
-:app:`Pyramid`\ 's transaction management is extendable, so you can synchronize commits between multiple databases or databases of different kinds. It also allows you to do things like conditionally send email if a transaction is committed, but otherwise keep quiet.
+Менеджмент транзакциями в :app:`Pyramid`\ расширяем, Поэтому вы можете синхронизировать транзакции между несколькими базами данных или базами данных разных типов. Это также позволяет вам делать такие вещи, как условно отправлять электронную почту, если совершена транзакция, но в остальных случаях "молчать".
 
 .. seealso::
 
-   See also :ref:`bfg_sql_wiki_tutorial` (note the lack of commit statements anywhere in application code).
+   See also :ref:`bfg_sql_wiki_tutorial` (Обратите внимание на отсутствие команд фиксации в любом месте кода приложения).
 
-Stop Worrying About Configuration
----------------------------------
+Перестаньте волноваться по поводу конфигурации
+----------------------------------------------
 
-When a system is small, it's reasonably easy to keep it all in your head. But as systems grow large, configuration grows more complex. Your app may grow to have hundreds or even thousands of configuration statements.
+Когда система мала, разумно легко держать все в голове. Но по мере роста систем, конфигурация становится более сложной. Ваше приложение может вырасти, чтобы иметь сотни или даже тысячи инструкций конфигурации.
 
-:app:`Pyramid`\ 's configuration system keeps track of each of your statements. If you accidentally add two that are identical, or :app:`Pyramid` can't make sense out of what it would mean to have both statements active at the same time, it will complain loudly at startup time.
+Система конфиграции :app:`Pyramid`\ отслеживает каждое из ваших стэйтов. Если вы случайно добавите два одинаковых, или :app:`Pyramid` не видит смысла в том что означало бы, что оба заявления активны одновременно, он будет громко протестовать во время запуска.
 
-:app:`Pyramid`\ 's configuration system is not dumb though. If you use the :meth:`~pyramid.config.Configurator.include` system, it can automatically resolve conflicts on its own. More local statements are preferred over less local ones. So you can intelligently factor large systems into smaller ones.
+Система конфиграции :app:`Pyramid`\ не тупая. Если вы используете систему :meth:`~pyramid.config.Configurator.include` ,он может автоматически разрешать конфликты самостоятельно. Более локальные заявления предпочтительнее, чем менее локальные. Таким образом, вы можете разумно распределить большие системы на более мелкие.
 
 .. seealso::
 
    See also :ref:`conflict_detection`.
 
-Compose Powerful Apps From Simple Parts
-----------------------------------------
+Составление мощных приложений из простых частей
+------------------------------------------------
 
-Speaking of the :app:`Pyramid` structured :meth:`~pyramid.config.Configurator.include` mechanism, it allows you to compose complex applications from multiple, simple Python packages. All the configuration statements that can be performed in your main :app:`Pyramid` application can also be used in included packages. You can add views, routes, and subscribers, and even set authentication and authorization policies.
+Структура механизма :app:`Pyramid` :meth:`~pyramid.config.Configurator.include` , он позволяет создавать сложные приложения из нескольких простых пакетов Python. Все инструкции конфигурации, которые могут быть выполнены в вашем главном :app:`Pyramid` приложении также можно использовать в прилагаемых пакетах. Вы можете добавлять views, routes, и subscribers, и даже устанавливать политики авторизации и авторизации.
 
-If you need, you can extend or override the configuration of an existing application by including its configuration in your own and then modifying it.
+Если вам нужно, вы можете расширить или переопределить конфигурацию существующего приложения, включив его конфигурацию самостоятельно, а затем изменив ее.
 
 
-For example, if you want to reuse an existing application that already has a bunch of routes, you can just use the ``include`` statement with a ``route_prefix``. All the routes of that application will be availabe, prefixed as you requested:
+Например, если вы хотите повторно использовать существующее приложение, которое уже имеет кучу маршрутов, просто используйте оператор ``include`` с ``route_prefix``. Все маршруты этого приложения будут доступны, с префиксом по вашему запросу:
 
 .. code-block:: python
     :linenos:
@@ -101,41 +101,41 @@ For example, if you want to reuse an existing application that already has a bun
 
     See also :ref:`including_configuration` and :ref:`building_an_extensible_app`.
 
-Authenticate Users Your Way
----------------------------
+Аутентификация пользователей по-своему
+-------------------------------------------
 
-:app:`Pyramid` ships with prebuilt, well-tested authentication and authorization schemes out of the box. Using a scheme is a matter of configuration. So if you need to change approaches later, you need only update your configuration.
+:app:`Pyramid` поставляется с предустановленной, протестированной схемой аутентификации и авторизации из коробки. Использование схемы - вопрос конфигурации. Поэтому, если вам нужно изменить подходы позже, вам нужно только обновить свою конфигурацию.
 
-In addition, the system that handles authentication and authorization is flexible and pluggable. If you want to use another security add-on, or define your own, you can. And again, you need only update your application configuration to make the change.
+Кроме того, система, которая обрабатывает аутентификацию и авторизацию, является гибкой и подключаемой. Если вы хотите использовать другое надстройку безопасности или определить свой собственный, вы можете. И снова вам нужно только обновить конфигурацию своего приложения, чтобы внести изменения.
 
 .. seealso::
 
    See also :ref:`enabling_authorization_policy`.
 
-Build Trees of Resources
-------------------------
+Построение дерева ресурсов
+--------------------------
 
-:app:`Pyramid` supports :term:`traversal`, a way of mapping URLs to a concrete :term:`resource tree`. If your application naturally consists of an arbitrary heirarchy of different types of content (like a CMS or a Document Management System), traversal is for you. If you have a requirement for a highly granular security model ("Jane can edit documents in *this* folder, but not *that* one"), traversal can be a powerful approach.
+:app:`Pyramid` поддерживает :term:`traversal`, способ отображения URLs на конкретное :term:`resource tree`. Если ваше приложение, естественно, состоит из произвольной иерархии различных типов контента (как CMS или Document Management System), traversal для вас. Если у вас есть требование для высоко-гранулированной модели безопасности ("Jane может редактировать документы в папке *this* , но не *that* one"), может быть мощным подходом.
 
 .. seealso::
 
    See also :ref:`hello_traversal_chapter` and :ref:`much_ado_about_traversal_chapter`.
 
-Take Action on Each Request with Tweens
----------------------------------------
+Применяйте действия для каждого запроса с помощью Tweens
+---------------------------------------------------------
 
-:app:`Pyramid` has a system for applying an arbitrary action to each request or response called a :term:`tween`. The system is similar in concept to WSGI :term:`middleware`, but can be more useful since :term:`tween`\ s run in the :app:`Pyramid` context, and have access to templates, request objects, and other niceties.
+:app:`Pyramid` имеет систему для применения произвольного действия к каждому запросу или ответу, называемому :term:`tween`. Система аналогична концепции WSGI :term:`middleware`, но может быть более полезным, поскольку :term:`tween`\ s запускается в контексте :app:`Pyramid` , и имеет доступ к шаблонам, объектам запросов и другим тонкостям.
 
-The :app:`Pyramid` debug toolbar is a :term:`tween`, as is the ``pyramid_tm`` transaction manager.
+Панели отладки :app:`Pyramid`  :term:`tween`, и ``pyramid_tm`` transaction manager.
 
 .. seealso::
 
    See also :ref:`registering_tweens`.
 
-Return What You Want From Your Views
-------------------------------------
+Возвращайте что хотите из ваших Views
+-------------------------------------
 
-We have shown elsewhere (in the :doc:`introduction`) how using a :term:`renderer` allows you to return simple Python dictionaries from your view code. But some frameworks allow you to return strings or tuples from view callables. When frameworks allow for this, code looks slightly prettier because there are fewer imports and less code. For example, compare this:
+Мы показали ранее (in the :doc:`introduction`) как использование :term:`renderer` позволяет вам возвращать простые словари Python из вашего кода view. But some frameworks позволяют возвращать строки или кортежи из view callables. Когда фреймворки допускают это, код выглядит немного красивее, потому что импорта меньше и меньше кода. Сравните например:
 
 .. code-block:: python
     :linenos:
@@ -153,11 +153,11 @@ To this:
     def aview(request):
         return "Hello world!"
 
-Nicer to look at, right?
+Выглядит приятнее не так ли?
 
-Out of the box, :app:`Pyramid` will raise an exception if you try to run the second example above. After all, a view should return a response, and "explicit is better than implicit".
+Из коробки, :app:`Pyramid` приведет к возникновению исключения, если вы попытаетесь запустить второй пример выше. В конце концов, представление должно возвращать ответ, а «явное - лучше, чем неявное».
 
-But if you're a developer who likes the aesthetics of simplicity, :app:`Pyramid` provides a way to support this sort of thing, the :term:`response adapter`\ :
+Но если вы разработчик, которому нравится эстетика простоты, :app:`Pyramid` Обеспечивает способ поддержки такого рода вещей, the :term:`response adapter`\ :
 
 .. code-block:: python
     :linenos:
@@ -170,7 +170,7 @@ But if you're a developer who likes the aesthetics of simplicity, :app:`Pyramid`
         response.content_type = 'text/html'
         return response
 
-A new response adapter is registered in configuration:
+Новый адаптер ответа зарегистрирован в конфигурации:
 
 .. code-block:: python
     :linenos:
@@ -179,7 +179,7 @@ A new response adapter is registered in configuration:
         config = Configurator()
         config.add_response_adapter(string_response_adapter, str)
 
-With that, you may return strings from any of your view callables, e.g.:
+Теперь, можете возвращать строки из любого из ваших view callables, e.g.:
 
 .. code-block:: python
     :linenos:
@@ -190,7 +190,7 @@ With that, you may return strings from any of your view callables, e.g.:
     def goodbyeview(request):
         return "Goodbye world!"
 
-You can even use a :term:`response adapter` to allow for custom content types and return codes:
+Можете даже использовать :term:`response adapter` разрешить настраиваемые типы контента и коды возврата:
 
 .. code-block:: python
     :linenos:
@@ -215,7 +215,7 @@ You can even use a :term:`response adapter` to allow for custom content types an
         config.add_response_adapter(string_response_adapter, str)
         config.add_response_adapter(tuple_response_adapter, tuple)
 
-With this, both of these views will work as expected:
+С этим, оба эти представления будут работать должным образом:
 
 .. code-block:: python
     :linenos:
@@ -230,10 +230,10 @@ With this, both of these views will work as expected:
 
    See also :ref:`using_iresponse`.
 
-Use Global Response Objects
----------------------------
+Использование глобального объекта ответа (Global Response Objects)
+------------------------------------------------------------------
 
-Views have to return responses. But constructing them in view code is a chore. And perhaps registering a :term:`response adapter` as shown above is just too much work. :app:`Pyramid` provides a global response object as well.  You can use it directly, if you prefer:
+Views должен возвращать ответы. Но построение их в виде кода - это обычное дело. И, возможно, зарегистрировать :term:`response adapter` как показано выше, это слишком много работы. :app:`Pyramid` предоставляет также global response.  Вы можете использовать его напрямую если хотите:
 
 .. code-block:: python
     :linenos:
@@ -248,10 +248,10 @@ Views have to return responses. But constructing them in view code is a chore. A
 
    See also :ref:`request_response_attr`.
 
-Extend Configuration
---------------------
+Расширение конфигурации
+-----------------------
 
-Perhaps the :app:`Pyramid` configurator's syntax feels a bit verbose to you. Or possibly you would like to add a feature to configuration without asking the core developers to change :app:`Pyramid` itself?
+Возможно синтаксис конфигуратора :app:`Pyramid` кажется вам слегка многословным. Или, возможно, вы хотели бы добавить функцию в конфигурацию, не попросив основных разработчиков изменить сам :app:`Pyramid` ?
 
 You can extend :app:`Pyramid`\ 's :term:`configurator` with your own directives. For example, let's say you find yourself calling :meth:`pyramid.config.Configurator.add_view` repetitively. Usually you can get rid of the boring with existing shortcuts, but let's say that this is a case where there is no such shortcut:
 
@@ -303,8 +303,8 @@ You can share your configuration code with others, too. Add your code to a Pytho
 
     See also :ref:`add_directive`.
 
-Introspect Your Application
----------------------------
+Интроспекция вашего приложения
+------------------------------
 
 If you're building a large, pluggable system, it's useful to be able to get a list of what has been plugged in *at application runtime*. For example, you might want to show users a set of tabs at the top of the screen based on a list of the views they registered.
 
