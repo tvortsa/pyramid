@@ -1,29 +1,28 @@
 .. _project_narr:
 
-Creating a :app:`Pyramid` Project
-=================================
+Создание проекта приложения :app:`Pyramid`
+==========================================
 
-As we saw in :ref:`firstapp_chapter`, it's possible to create a :app:`Pyramid`
-application completely manually.  However, it's usually more convenient to use
-a :term:`cookiecutter` to generate a basic :app:`Pyramid` :term:`project`.
+Как мы видели в :ref:`firstapp_chapter`, можно создать приложение :app:`Pyramid`
+вручную.  Но, обычно удобнее использовать :term:`cookiecutter` для генерации базового проекта
+:app:`Pyramid` :term:`project`.
 
-A project is a directory that contains at least one Python :term:`package`.
-You'll use a cookiecutter to create a project, and you'll create your application
-logic within a package that lives inside the project.  Even if your application
-is extremely simple, it is useful to place code that drives the application
-within a package, because (1) a package is more easily extended with new code,
-and (2) an application that lives inside a package can also be distributed more
-easily than one which does not live within a package.
+Проект это папка которая содержит хотя бы один пакет Python :term:`package`.
+Мы используем cookiecutter для создания проекта, и вы создадите логику своего приложения
+внутри пакета, который живет внутри проекта. Даже если ваше приложение очень простое,
+полезно размещать код который управляет приложением в пакете, потому что (1) пакет
+пакет куда проще расширяется новым кодом, и (2) приложение, которое находится внутри пакета
+также проще распространять чем те, который не внутри пакета.
 
-The Pylons Project provides several :app:`Pyramid` cookiecutters that you can use to generate a
-project.  Each cookiecutter makes different configuration assumptions about what
-type of application you're trying to construct.
+Проект Pylons предусматривает несколько :app:`Pyramid` cookiecutters которые вы можете использовать
+для генерации проекта.  Каждый cookiecutter делает различные предположения о конфигурации того типа
+приложения, которое вы пытаетесь построить.
 
-These cookiecutters are rendered using the ``cookiecutter`` command that you may install.
+Эти cookiecutters рендерятся командой  ``cookiecutter`` которую вы должны установить.
 
 .. seealso::
 
-    See also `Cookiecutter Installation <https://cookiecutter.readthedocs.io/en/latest/installation.html>`_.
+    См. также `Cookiecutter Installation <https://cookiecutter.readthedocs.io/en/latest/installation.html>`_.
 
 
 .. index::
@@ -37,28 +36,29 @@ These cookiecutters are rendered using the ``cookiecutter`` command that you may
 :app:`Pyramid` cookiecutters
 ----------------------------
 
-Pyramid cookiecutters released under the Pylons Project differ from each other on a number of axes:
+Pyramid cookiecutters находящиеся в Pylons Project отличаются друг от друга на ряде осей:
 
-- the persistence mechanism they offer (no persistence mechanism, :term:`SQLAlchemy` with SQLite, or :term:`ZODB`)
+- механизмом персистенции (нет персистенции, :term:`SQLAlchemy` с SQLite, или :term:`ZODB`)
 
-- the mechanism they use to map URLs to code (:term:`URL dispatch` or :term:`traversal`)
+- механизм отображения URLs в коде (:term:`URL dispatch` или :term:`traversal`)
 
-- templating libraries (:term:`Jinja2`, :term:`Chameleon`, or :term:`Mako`)
+- библиотека шаблонов (:term:`Jinja2`, :term:`Chameleon`, или :term:`Mako`)
 
 * `pyramid-cookiecutter-starter <https://github.com/Pylons/pyramid-cookiecutter-starter>`_
 * `pyramid-cookiecutter-alchemy <https://github.com/Pylons/pyramid-cookiecutter-alchemy>`_
 * `pyramid-cookiecutter-zodb <https://github.com/Pylons/pyramid-cookiecutter-zodb>`_
 
-These cookiecutters include:
+Эти cookiecutters включают:
 
 ``pyramid-cookiecutter-starter``
-    :term:`URL dispatch` for routing and either :term:`Jinja2`, :term:`Chameleon`, or :term:`Mako` for templating
+    :term:`URL dispatch` для маршрутизации и :term:`Jinja2`, :term:`Chameleon`, или :term:`Mako` для шаблонов
 
 ``pyramid-cookiecutter-alchemy``
-    SQLite for persistent storage, :term:`SQLAlchemy` for an ORM, :term:`URL dispatch` for routing, and :term:`Jinja2` for templating.
+    SQLite для постоянного хранения, :term:`SQLAlchemy` для ORM, :term:`URL dispatch` для маршрутизации,
+    и :term:`Jinja2` для шаблонов.
 
 ``pyramid-cookiecutter-zodb``
-    :term:`ZODB` for persistent storage, :term:`traversal` for routing, and :term:`Chameleon` for templating
+    :term:`ZODB` для постоянного хранения, :term:`traversal` для маршрутизации, и :term:`Chameleon` для шаблонов
 
 
 .. index::
@@ -68,26 +68,26 @@ These cookiecutters include:
 
 .. _creating_a_project:
 
-Creating the Project
+Создание проекта
 --------------------
 
-In :ref:`installing_chapter`, you created a virtual Python environment via the
-``venv`` command. We called the virtual environment directory
-``env`` and set an environment variable ``VENV`` to its path.
+В :ref:`installing_chapter`, создайте  виртуальное пространство Python
+командой ``venv``. Мы называем папку виртуального пространства
+``env`` и задаем для пути к ней переменную окружения ``VENV`` .
 
-We assume that you :ref:`previously installed cookiecutter <cookiecutters>`, following its installation instructions.
+Мы предполагаем, что вы :ref:`previously installed cookiecutter <cookiecutters>`, следуя его инструкциям по установке.
 
-We'll choose ``pyramid-cookiecutter-starter`` to start the project.  When we invoke ``cookiecutter``, it will create a directory that represents our project.
+Мы выберем ``pyramid-cookiecutter-starter`` для стартового проекта.  Когда мы вызываем ``cookiecutter``, Он создаст каталог, представляющий наш проект.
 
-We assume our current working directory is the value of ``VENV``.
+Предположим, что наш текущий рабочий каталог - это значение ``VENV``.
 
-On all platforms, generate a project using cookiecutter.
+На всех платформах создайте проект, используя cookiecutter.
 
 .. code-block:: bash
 
    $ cookiecutter gh:Pylons/pyramid-cookiecutter-starter --checkout master
 
-If prompted for the first item, accept the default ``yes`` by hitting return.
+Если выбирается первый элемент, по умолчанию принимается ``yes`` нажатием на ввод.
 
 .. code-block:: text
 
@@ -101,9 +101,9 @@ If prompted for the first item, accept the default ``yes`` by hitting return.
     3 - mako
     Choose from 1, 2, 3 [1]: 1
 
-We then run through the following commands.
+Затем выполняем следующие команды.
 
-On UNIX:
+В UNIX:
 
 .. code-block:: bash
 
@@ -116,7 +116,7 @@ On UNIX:
     # ...where we upgrade packaging tools.
     $ env/bin/pip install --upgrade pip setuptools
 
-Or on Windows:
+В Windows:
 
 .. code-block:: doscon
 
@@ -129,32 +129,32 @@ Or on Windows:
     # ...where we upgrade packaging tools.
     c:\myproject> %VENV%\Scripts\pip install --upgrade pip setuptools
 
-As a result of invoking the ``cookiecutter`` command, a directory named
-``myproject`` is created.  That directory is a :term:`project` directory. The
-``setup.py`` file in that directory can be used to distribute your application,
-or install your application for deployment or development.
+В результате использования команды ``cookiecutter``, создается папка с именем
+``myproject``.  Эта папка - папка проекта :term:`project`. Файл
+``setup.py`` в этом каталоге может использоваться для распространения вашего приложения,
+или установите приложение для развертывания или разработки.
 
-An ``.ini`` file named ``development.ini`` will be created in the project
-directory.  You will use this ``.ini`` file to configure a server, to run your
-application, and to debug your application.  It contains configuration that
-enables an interactive debugger and settings optimized for development.
+Файл ``.ini`` с именем ``development.ini`` будет создан в папке проекта.  
+Этот ``.ini`` файл используют для конфигурации сервера, для запуска вашего приложения,
+и для отладки вашего приложения.  Он содержит конфигурацию, которая разрешает интерактивный
+отладчик и настройки, оптимизированные для разработки.
 
-Another ``.ini`` file named ``production.ini`` will also be created in the
-project directory.  It contains configuration that disables any interactive
-debugger (to prevent inappropriate access and disclosure), and turns off a
-number of debugging settings.  You can use this file to put your application
-into production.
+Другой ``.ini`` файл с именем ``production.ini`` также будет создан в папке проекта.
+Он содержит конфигурации которые отключают интерактивный отладчик 
+(Для предотвращения неприемлемого доступа и раскрытия информации), и отключает
+некоторые параметры отладкиand. Вы можете использовать код здесь для размещения
+вашего приложения в продакшн.
 
-The ``myproject`` project directory contains an additional subdirectory named
-``myproject`` (note the case difference) representing a Python :term:`package`
-which holds very simple :app:`Pyramid` sample code.  This is where you'll edit
-your application's Python code and templates.
+Папка ``myproject`` содержит дополнительно папку с тем же именем
+``myproject`` (note the case difference) представляющую  Python :term:`package`
+который содержит очень простой :app:`Pyramid` код примера.  Здесь вы редактируете
+Python code вашего приложения и шаблоны.
 
-We created this project in a directory next to its virtual environment directory.
-However, note that this is not mandatory. The project directory can go more or
-less anywhere on your filesystem. You don't need to put it in a special "web
-server" directory. You could put it within a virtual environment
-directory. The author uses Linux mainly, and tends to put project directories
+Мы создали этот проект в папке рядом с его папкой виртуальной среды.
+Однако, заметьте что эт о не обязательно. Папка проекта может быть выше или ниже
+в вашей файловой системе. Вам НЕ обязательно помещать ее в какую-то специальную 
+папку "web server". Вы мождете разместить его в папке виртуальной среды.
+The author uses Linux mainly, and tends to put project directories
 which he creates within his ``~/projects`` directory. On Windows, it's a good
 idea to put project directories within a directory that contains no space
 characters, so it's wise to *avoid* a path that contains, i.e., ``My
@@ -163,44 +163,43 @@ projects in ``C:\projects``.
 
 .. warning::
 
-   You'll need to avoid using ``cookiecutter`` to create a project with the same
-   name as a Python standard library component. In particular, this means you
-   should avoid using the names ``site`` or ``test``, both of which conflict
-   with Python standard library packages.  You should also avoid using the name
-   ``pyramid``, which will conflict with Pyramid itself.
+   Вам следует избегать создания проектов с помощью ``cookiecutter`` с именами
+   совпадающими с именами стандартных библиотек Python. В частности, избегайте имен
+   ``site`` или ``test``, оба имени конфликтуют с пакетами стандартной библиотеки Python
+   .  Избегайте также названия
+   ``pyramid``, из-за конфликта с самой Pyramid.
 
 .. index::
    single: setup.py develop
    single: development install
 
-Installing your Newly Created Project for Development
------------------------------------------------------
+Установка нового проекта для разработки
+-----------------------------------------
 
-To install a newly created project for development, you should ``cd`` to the
-newly created project directory and use the Python interpreter from the
-:term:`virtual environment` you created during :ref:`installing_chapter` to
-invoke the command ``pip install -e .``, which installs the project in
-development mode (``-e`` is for "editable") into the current directory (``.``).
+Войдите ``cd`` во вновь созданный каталог проекта и использовать интерпретатор
+Python из :term:`virtual environment` который создали в :ref:`installing_chapter` и
+вызовите команду ``pip install -e .``, которая установит проект в режиме разработки
+(``-e`` значит "editable") в текущую папку (``.``).
 
-The file named ``setup.py`` will be in the root of the cookiecutter-generated
-project directory.  The ``python`` you're invoking should be the one that lives
-in the ``bin`` (or ``Scripts`` on Windows) directory of your virtual Python
-environment.  Your terminal's current working directory *must* be the newly
-created project directory.
+Файл ``setup.py`` будет в корне созданного cookiecutter каталог проекта. 
+Вы должны использовать `` python``, который вы используете в каталоге `` bin``
+(или `` Scripts`` для Windows вашего виртуального Python виртуального кружения.. 
+Текущий рабочий каталог вашего терминала * должен * быть этим только-созданным
+каталогом проекта.
 
-On UNIX:
+В UNIX:
 
 .. code-block:: bash
 
     $ $VENV/bin/pip install -e .
 
-Or on Windows:
+или в Windows:
 
 .. code-block:: doscon
 
     c:\env\myproject> %VENV%\Scripts\pip install -e .
 
-Elided output from a run of this command on UNIX is shown below:
+результат выполнения этой команды в UNIX показан ниже:
 
 .. code-block:: bash
 
@@ -211,16 +210,16 @@ Elided output from a run of this command on UNIX is shown below:
     repoze.lru-0.6 translationstring-1.3 venusian-1.0 waitress-1.0.1 \
     zope.deprecation-4.2.0 zope.interface-4.3.3
 
-This will install a :term:`distribution` representing your project into the
-virtual environment interpreter's library set so it can be found by ``import``
-statements and by other console scripts such as ``pserve``, ``pshell``,
-``proutes``, and ``pviews``.
+Это установит :term:`distribution` представляя ваш проект в
+virtual environment interpreter's library становленный таким образом,
+чтобы его можно было найти орператором ``import`` и другими консольными
+скриптами, такими как ``pserve``, ``pshell``, ``proutes``, и ``pviews``.
 
 .. index::
    single: running tests
    single: tests (running)
 
-Running the Tests for Your Application
+Запуск тестов для вашего приложения
 --------------------------------------
 
 To run unit tests for your application, you must first install the testing
@@ -298,8 +297,8 @@ path to the module on which we want to run tests and coverage.
 
 .. _running_the_project_application:
 
-Running the Project Application
--------------------------------
+Запуск проекта приложения
+--------------------------
 
 .. seealso:: See also the output of :ref:`pserve --help <pserve_script>`.
 
