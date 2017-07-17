@@ -79,9 +79,9 @@ You can get help quickly with :app:`Pyramid`. It's our goal that no :app:`Pyrami
 
 There are many tools available for web development. What would make someone want to use :app:`Pyramid` instead?  What makes :app:`Pyramid` unique?
 
-With :app:`Pyramid` you can write very small applications without needing to know a lot. And by learning a bit more, you can write very large applications too. :app:`Pyramid` will allow you to become productive quickly, and will grow with you. It won't hold you back when your application is small, and it won't get in your way when your application becomes large. Other application frameworks seem to fall into two non-overlapping categories: those that support "small apps" and those designed for "big apps".
+C :app:`Pyramid` вы можете создавать очень маленькие приложения не требующие больших знаний. Узнав немного больше, вы сможете писать и очень большие приложения тоже. :app:`Pyramid` позволит вам быстро стать продуктивным, и будет расти вместе с вами. Он не будет удерживать вас, когда ваше приложение будет небольшим, И он не будет мешать вам, когда ваше приложение станет большим. Остальные фрэймворки, похоже, попадают в две неперекрывающиеся категории: которые поддерживают "маленькие приложения" и те что разработаны под "большие приложения".
 
-We don't believe you should have to make this choice. You can't really know how large your application will become.  You certainly shouldn't have to rewrite a small application in another framework when it gets "too big". A well-designed framework should be able to be good at both. :app:`Pyramid` is that kind of framework.
+Мы не считаем, что вам нужно сделать этот выбор. Вы не можете точно знать, насколько большин станет ваше приложение. Вы, конечно, не должны переписывать небольшое приложение в другом фрэймворке, когда оно станет "слишком большим". Хорошо спроектированный фрэймворк должен быть одинаково хорош и для больших приложений и для малых. :app:`Pyramid` как раз такой фрэймворк.
 
 :app:`Pyramid` provides a set of features that are unique among Python web frameworks. Others may provide some, but only :app:`Pyramid` provides them all, in one place, fully documented, and *à la carte* without needing to pay for the whole banquet.
 
@@ -89,7 +89,7 @@ We don't believe you should have to make this choice. You can't really know how 
 Построение одно-файлового приложеия
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can write a :app:`Pyramid` application that lives entirely in one Python file. Such an application is easy to understand since everything is in one place. It is easy to deploy because you don't need to know much about Python packaging. :app:`Pyramid` allows you to do almost everything that so-called *microframeworks* can in very similar ways.
+Вы можете написать на :app:`Pyramid` приложение существующее только в одном Python файле. Такое приложение легко понять, поскольку все находится в одном месте. Его легко развернуть, поскольку вам не нужно много знать о Python пакетах. :app:`Pyramid` позволяет делать практически все что подразумевают под *microframeworks* очень похожими способами.
 
 .. literalinclude:: helloworld.py
 
@@ -97,10 +97,10 @@ You can write a :app:`Pyramid` application that lives entirely in one Python fil
 
     See also :ref:`firstapp_chapter`.
 
-Configure applications with decorators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Настройка приложений декораторами
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:app:`Pyramid` allows you to keep your configuration right next to your code. That way you don't have to switch files to see your configuration. For example:
+:app:`Pyramid` позволяет сохранить конфигурацию прямо рядом с вашим кодом. Таким образом, вам не нужно переключать файлы, чтобы увидеть вашу конфигурацию. НАпример:
 
 .. code-block:: python
 
@@ -111,14 +111,14 @@ Configure applications with decorators
    def fred_view(request):
        return Response('fred')
 
-However, using :app:`Pyramid` configuration decorators does not change your code. It remains easy to extend, test, or reuse. You can test your code as if the decorators were not there. You can instruct the framework to ignore some decorators. You can even use an imperative style to write your configuration, skipping decorators entirely.
+Но, использование :app:`Pyramid` декораторов конфигурации не меняют ваш код. Он остается легко-расширяемым, тестируемым, и повторно используемым. Вы можете тестировать ваш код так как будто декораторов в нем нет. Вы можете сказать движку игнорировать некоторые декораторы. Вы даже можете использовать императивный стиль для написания вашей конфигурации, полностью пропустив декораторы.
 
 .. seealso::
 
     See also :ref:`mapping_views_using_a_decorator_section`.
 
-Generate application URLs
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Генерауия URLов приложения
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Динамические web приложения генерируют URLы которые могут изменяться в зависимости от того что вы просматриваете. :app:`Pyramid` предоставляет гибкий, последовательный, простой в использовании инструмент генерации URLs. Используя который, вы можете менять вашу конфигурацию не боясь нарушить ссылки на веб-страницах.
 
@@ -135,27 +135,27 @@ Web часто требуют JavaScript, CSS, images и проч. так наз
 
     See also :ref:`static_assets_section`.
 
-Develop interactively
-~~~~~~~~~~~~~~~~~~~~~
+Интерактивная разработка
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-:app:`Pyramid` can automatically detect changes you make to template files and code, so your changes are immediately available in your browser. You can debug using plain old ``print()`` calls, which will display to your console.
+:app:`Pyramid` Может автоматически обнаруживать изменения, которые вы вносите в файлы шаблонов и кода, так что мваши изменения сразу доступны в браузере. Вы можете отлаживать используя простой старый вызов ``print()``, который будет отображаться на вашей консоли.
 
-:app:`Pyramid` has a debug toolbar that allows you to see information about how your application is working right in your browser. See configuration, installed packages, SQL queries, logging statements and more.
+:app:`Pyramid` имеет тулбар отладки который позволяет вам видеть информацию о том, как ваше приложение работает прямо в браузере. See configuration, installed packages, SQL queries, logging statements and more.
 
-When your application has an error, an interactive debugger allows you to poke around from your browser to find out what happened.
+Когда в приложении случается ошибка, интерактивный отладчик позволяет вам to poke around из браузера, чтобы узнать, что произошло.
 
-To use the :app:`Pyramid` debug toolbar, build your project with a :app:`Pyramid` :term:`cookiecutter`.
+Чтобы использовать тулбар отладки :app:`Pyramid` , соберите ваш проект с :app:`Pyramid` :term:`cookiecutter`.
 
 .. seealso::
 
     See also :ref:`debug_toolbar`.
 
-Debug with power
+Мощная отладка
 ~~~~~~~~~~~~~~~~
 
-When things go wrong, :app:`Pyramid` gives you powerful ways to fix the problem.
+Когда все плохо, :app:`Pyramid` дает вам мощные способы решения проблемы.
 
-You can configure :app:`Pyramid` to print helpful information to the console. The ``debug_notfound`` setting shows information about URLs that aren't matched. The ``debug_authorization`` setting provides helpful messages about why you aren't allowed to do what you just tried.
+Вы можете настроить :app:`Pyramid` чтобы оно печатало полезную информацию в консоли. Настройка ``debug_notfound`` отображает информацию о URLах которые не соответствуют. Опция ``debug_authorization`` предоставляет полезные сообщения о том, почему вам не разрешено делать то, что вы только что пробовали.
 
 :app:`Pyramid` also has command line tools to help you verify your configuration. You can use ``proutes`` and ``pviews`` to inspect how URLs are connected to your application code.
 
@@ -169,7 +169,7 @@ Extend your application
 
 :app:`Pyramid` add-ons extend the core of the framework with useful abilities. There are add-ons available for your favorite template language, SQL and NoSQL databases, authentication services and more.
 
-Supported :app:`Pyramid` add-ons are held to the same demanding standards as the framework itself. You will find them to be fully tested and well documented.
+Поддерживаемые :app:`Pyramid` плагины придерживаются тех же требовательных стандартов, что и сам фрэймворк. Вы найдете их полностью протестированными и хорошо документированными.
 
 .. seealso::
 
@@ -178,9 +178,9 @@ Supported :app:`Pyramid` add-ons are held to the same demanding standards as the
 Написание ваших видов, *вашим* способом
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Фундаментальная задача для любого фрэймворка отображение URLs на код. В :app:`Pyramid`, этот код называется :term:`view callable`. View callables могут быть функциями, методами класса или даже экземплярами callable сласса. You are free to choose the approach that best fits your use case. Regardless of your choice, :app:`Pyramid` treats them the same. You can change your mind at any time without any penalty. There are no artificial distinctions between the various approaches.
+Фундаментальная задача для любого фрэймворка отображение URLs на код. В :app:`Pyramid`, этот код называется :term:`view callable`. View callables могут быть функциями, методами класса или даже экземплярами callable сласса. Вы можете выбрать подход, который наилучшим образом подходит для вашего случая использования. Независимо от вашего выбора, :app:`Pyramid` относится к ним одинаково. Вы можете передумать в любое время без каких-либо последствий. Нет никаких искусственных различий между различными подходами.
 
-Here's a view callable defined as a function:
+Вот view callable объявленный как функция:
 
 .. code-block:: python
    :linenos:
@@ -192,7 +192,7 @@ Here's a view callable defined as a function:
    def aview(request):
        return Response('one')
 
-Here's a few views defined as methods of a class instead:
+А вот несколько видов объявленные как методы класса:
 
 .. code-block:: python
    :linenos:
@@ -223,33 +223,33 @@ Here's a few views defined as methods of a class instead:
 
 Во многих web frameworks, статические активы требуемые приложению, хранятся в глобальном общем месте, "папке *static* ". Другие используют lookup scheme, как упорядоченный набор шаблонных каталогов. Оба эти подхода имеют проблемы, когда дело доходит до настройки.
 
-:app:`Pyramid` использует другой подход. Static assets are located using *asset specifications*, strings that contain reference both to a Python package name and a file or directory name, e.g. ``MyPackage:static/index.html``. These specifications are used for templates, JavaScript and CSS, translation files, and any other package-bound static resource. By using asset specifications, :app:`Pyramid` makes it easy to extend your application with other packages without worrying about conflicts.
+:app:`Pyramid` использует другой подход. Статические активы локализуются с использованием *asset specifications*, Строки, содержащие ссылки как на имя пакета Python, так и на имя файла или каталога, e.g. ``MyPackage:static/index.html``. Эти спецификации используются для шаблонов, JavaScript и CSS, файлов переводов, и любой другой статический ресурс, связанный с пакетом. Используя спецификации активов, :app:`Pyramid` Упрощает расширение вашего приложения с помощью других пакетов, не беспокоясь о конфликтах.
 
-What happens if another :app:`Pyramid` package you are using provides an asset you need to customize? Maybe that page template needs better HTML, or you want to update some CSS. With asset specifications you can override the assets from other packages using simple wrappers.
+Что будет если другой :app:`Pyramid` пакет используемый вами предоставляет вам актив, необходимый для настройки? Возможно, этот шаблон страницы нуждается в улучшенном HTML, или вы хотите обновить некий CSS. С asset specifications вы можете переопределить активы из других пакетов с помощью простых оберток.
 
-Examples: :ref:`asset_specifications` and :ref:`overriding_assets_section`.
+Пример: :ref:`asset_specifications` и :ref:`overriding_assets_section`.
 
-Use *your* templates
-~~~~~~~~~~~~~~~~~~~~
+Использование *ваших* шаблонов
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In :app:`Pyramid`, the job of creating a ``Response`` belongs to a :term:`renderer`. Any templating system—Mako, Chameleon, Jinja2—can be a renderer. In fact, packages exist for all of these systems. But if you'd rather use another, a structured API exists allowing you to create a renderer using your favorite templating system. You can use the templating system *you* understand, not one required by the framework.
+В :app:`Pyramid`, задача по созданию ``Response`` лежит на :term:`renderer`. Любая система шаблонов—Mako, Chameleon, Jinja2—может быть отрендерена. Фактически, есть пакеты для каждой из этих систем. Но если вы предпочитаете использовать другую, существует структурированный API существует возможность создания рендерера с использованием вашей любимой системы шаблонов. Вы можете использовать систему шаблонов понятную *вам*, а не ту что требует framework.
 
 What's more, :app:`Pyramid` does not make you use a single templating system exclusively.  You can use multiple templating systems, even in the same project.
 
 Example: :ref:`templates_used_directly`.
 
-Write testable views
-~~~~~~~~~~~~~~~~~~~~
+Написание тестируемых видов
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you use a :term:`renderer` with your view callable, you are freed from needing to return a "webby" ``Response`` object. Instead your views can return a simple Python dictionary. :app:`Pyramid` will take care of rendering the information in that dictionary to a ``Response`` on your behalf. As a result, your views are more easily tested, since you don't need to parse HTML to evaluate the results. :app:`Pyramid` makes it a snap to write unit tests for your views, instead of requiring you to use functional tests.
+Когда вы используете :term:`renderer` с вашим view callable, вы освобождаетесь от необходимости возвращать "webby" ``Response`` объект. Вместо этого ваши представления могут возвращать простой словарь Python. :app:`Pyramid` позаботится о рендеринге информации в этом словаре ``Response`` за вас. В результате ваши виды легче тестируются, поскольку вам не нужно парсить HTML для оценки результатов. :app:`Pyramid` делает его легким для написания модульных тестов для ваших представлений вместо того, чтобы требовать от вас использования функциональных тестов.
 
 .. index::
-   pair: renderer; explicitly calling
-   pair: view renderer; explictly calling
+   pair: renderer; явный вызов
+   pair: view renderer; явный вызов
 
 .. _example_render_to_response_call:
 
-For example, a typical web framework might return a ``Response`` object from a ``render_to_response`` call:
+Например, типичный веб-framework может вернуть ``Response`` объект из ``render_to_response`` вызова:
 
 .. code-block:: python
     :linenos:
@@ -260,7 +260,7 @@ For example, a typical web framework might return a ``Response`` object from a `
         return render_to_response('myapp:templates/mytemplate.pt', {'a':1},
                                   request=request)
 
-While you *can* do this in :app:`Pyramid`, you can also return a Python dictionary:
+А вы * можете * сделать это в :app:`Pyramid`, кроме того, вы можете вернуть словарь Python:
 
 .. code-block:: python
     :linenos:
@@ -271,18 +271,17 @@ While you *can* do this in :app:`Pyramid`, you can also return a Python dictiona
     def myview(request):
         return {'a':1}
 
-By configuring your view to use a renderer, you tell :app:`Pyramid` to use the ``{'a':1}`` dictionary and the specified template to render a response on your behalf.
+Путем настройки вашего представления на использование рендера, вы сообщаете :app:`Pyramid` использовать ``{'a':1}`` Словарь и указанный шаблон ответа от вашего имени.
 
-The string passed as ``renderer=`` above is an :term:`asset specification`. Asset specifications are widely used in :app:`Pyramid`. They allow for more reliable customization. See :ref:`intro_asset_specs` for more information.
+Строка передавалась как ``renderer=`` выше это :term:`asset specification`. Asset specifications широко используется в :app:`Pyramid`. Они обеспечивают более надежную настройку. См :ref:`intro_asset_specs` больше информации.
 
-Example: :ref:`renderers_chapter`.
+Пример: :ref:`renderers_chapter`.
 
 Использование событий для координирования действий
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Создавая web приложения, часто бывает важно, чтобы ваш код выполнялся в определенной точке жизненного цикла запроса. В :app:`Pyramid`, вы можете выполнить это, используя *subscribers* и *events*.
 
-When writing web applications, it is often important to have your code run at a specific point in the lifecycle of a request. In :app:`Pyramid`, you can accomplish this using *subscribers* and *events*.
-
-For example, you might have a job that needs to be done each time your application handles a new request. :app:`Pyramid` emits a ``NewRequest`` event at this point in the request handling lifecycle. You can register your code as a subscriber to this event using a clear, declarative style:
+Например, у вас может быть задание, которое нужно выполнять каждый раз, когда ваше приложение обрабатывает новый запрос. :app:`Pyramid` испускает ``NewRequest`` событие на этом этапе жизненного цикла обработки запросов. Вы можете зарегистрировать свой код в качестве подписчика на это событие, используя чисто декларативный стиль:
 
 .. code-block:: python
 
@@ -293,9 +292,9 @@ For example, you might have a job that needs to be done each time your applicati
     def my_job(event):
         do_something(event.request)
 
-:app:`Pyramid`\ 's event system can be extended as well. If you need, you can create events of your own and send them using :app:`Pyramid`\ 's event system. Then anyone working with your application can subscribe to your events and coordinate their code with yours.
+Система событий :app:`Pyramid`\ может быть расширена. Если вам нужно, вы можете создавать собственные события и отправлять их с помощью системы событий :app:`Pyramid`\ . Тогда любой, кто работает с вашим приложением, может подписаться на ваши события и скоординировать свой код с вашими.
 
-Example: :ref:`events_chapter` and :ref:`event_types`.
+Пример: :ref:`events_chapter` и :ref:`event_types`.
 
 Build international applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
