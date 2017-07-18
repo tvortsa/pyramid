@@ -13,9 +13,9 @@ Pyramid
         :target: https://webchat.freenode.net/?channels=pyramid
         :alt: IRC Freenode
 
-`Pyramid <https://trypyramid.com/>`_ is a small, fast, down-to-earth, open
-source Python web framework. It makes real-world web application development
-and deployment more fun, more predictable, and more productive.
+`Pyramid <https://trypyramid.com/>`_ это небольшой, быстрый, приземленный, open
+source Python web framework. Он делает разработку web-приложений  и их развертку,
+веселой предсказуемой и продуктивной.
 
 .. code-block:: python
 
@@ -34,25 +34,25 @@ and deployment more fun, more predictable, and more productive.
        server = make_server('0.0.0.0', 8080, app)
        server.serve_forever()
 
-Pyramid is a project of the `Pylons Project <https://pylonsproject.org>`_.
+Pyramid это проект проекта `Pylons  <https://pylonsproject.org>`_.
 
-Support and Documentation
+Поддержка и документация
 -------------------------
 
-See `Pyramid Support and Development
+См `Pyramid Support и Development
 <https://docs.pylonsproject.org/projects/pyramid/en/latest/#support-and-development>`_
 for documentation, reporting bugs, and getting support.
 
-Developing and Contributing
+Разработка и содействие
 ---------------------------
 
-See `HACKING.txt <https://github.com/Pylons/pyramid/blob/master/HACKING.txt>`_ and
+См `HACKING.txt <https://github.com/Pylons/pyramid/blob/master/HACKING.txt>`_ and
 `contributing.md <https://github.com/Pylons/pyramid/blob/master/contributing.md>`_
-for guidelines on running tests, adding features, coding style, and updating
+гадлайны по юнит-тестам, доп. фичам, стилю кодинга, and updating
 documentation when developing in or contributing to Pyramid.
 
-License
--------
+Лицензия
+--------
 
 Pyramid is offered under the BSD-derived `Repoze Public License
 <http://repoze.org/license.html>`_.
