@@ -1,30 +1,28 @@
 .. _index:
 
 =========================
-The Pyramid Web Framework
+ Pyramid Web Framework
 =========================
 
-:app:`Pyramid` is a small, fast, down-to-earth Python web framework.  It is
-developed as part of the `Pylons Project <https://pylonsproject.org>`_.
-It is licensed under a `BSD-like license <http://repoze.org/license.html>`_.
+:app:`Pyramid` это небольшой, быстрый, приземленный веб-фрэймворк для Python. 
+Он разработан как часть проекта `Pylons Project <https://pylonsproject.org>`_.
+Лицензирован под `BSD-like лицензией <http://repoze.org/license.html>`_.
 
-Here is one of the simplest :app:`Pyramid` applications you can make:
+Вот простейшее приложение :app:`Pyramid` :
 
 .. literalinclude:: narr/helloworld.py
 
-After you install :app:`Pyramid` and run this application, when you visit
-`<http://localhost:8080/hello/world>`_ in a browser, you will see the text
-``Hello, world!`` See :ref:`firstapp_chapter` for a full explanation of how
-this application works.
+После установки :app:`Pyramid` запустите это приложение, посетите браузером
+`<http://localhost:8080/hello/world>`_ , и увидите текст
+``Hello, world!`` Прочтите :ref:`firstapp_chapter` чтобы узнать как работает это приложение.
 
 
 .. _getting_started:
 
-Getting Started
+Приступаем
 ===============
 
-If you are new to Pyramid, we have a few resources that can help you get up to
-speed right away.
+Если вы новичок в Pyramid, у нас есть несколько ресурсов для ускоренного ознакомления.
 
 .. toctree::
    :hidden:
@@ -32,30 +30,29 @@ speed right away.
    quick_tour
    quick_tutorial/index
 
-* :doc:`quick_tour` gives an overview of the major features in Pyramid,
-  covering a little about a lot.
+* :doc:`quick_tour` дает обзор основных функций Pyramid,
+  и раскрывает немного больше.
 
-* :doc:`quick_tutorial/index` is similar to the Quick Tour, but in a tutorial
-  format, with somewhat deeper treatment of each topic and with working code.
+* :doc:`quick_tutorial/index` похож на Quick Tour, но в формате уроков,
+   с несколько более глубоким рассмотрением каждой темы и рабочим кодом.
 
-* Like learning by example? Visit the official :ref:`html_tutorials` as well as
-  the community-contributed :ref:`Pyramid Tutorials
+* Нравится обучение на примерах? Посетите официальный :ref:`html_tutorials` и
+   community-contributed :ref:`Pyramid Tutorials
   <tutorials:pyramid-tutorials>` and :ref:`Pyramid Community Cookbook
   <cookbook:pyramid-cookbook>`.
 
-* For help getting Pyramid set up, try :ref:`installing_chapter`.
+* Получить помощь по настройке Pyramid, можно тут :ref:`installing_chapter`.
 
 * Need help?  See :ref:`Support and Development <support-and-development>`.
 
 
 .. _html_tutorials:
 
-Tutorials
+Уроки
 =========
 
-Official tutorials explaining how to use :app:`Pyramid` to build various types
-of applications, and how to deploy :app:`Pyramid` applications to various
-platforms.
+Официальные уроки рассказывают как использовать :app:`Pyramid` для построения
+различных типов приложений, и как их развертывать :app:`Pyramid` на разных платформах.
 
 .. toctree::
    :maxdepth: 1
@@ -67,11 +64,10 @@ platforms.
 
 .. _support-and-development:
 
-Support and Development
+Поддержка и разработка
 =======================
 
-The `Pyramid website <https://trypyramid.com/resources.html>`_ is the main
-entry point to :app:`Pyramid` web framework resources for support and
+Сайт `Pyramid  <https://trypyramid.com/resources.html>`_ основная точка входа в :app:`Pyramid` ресурсы по поддержке
 development information.
 
 To report bugs, use the `issue tracker
@@ -100,10 +96,10 @@ To find out how to become a contributor to :app:`Pyramid`, please see `How to Co
 
 .. _html_narrative_documentation:
 
-Narrative Documentation
+Narrative Документация
 =======================
 
-Narrative documentation in chapter form explaining how to use :app:`Pyramid`.
+Narrative документация в форме главы, объясняющая, как использовать :app:`Pyramid`.
 
 .. toctree::
    :maxdepth: 2
@@ -150,10 +146,10 @@ Narrative documentation in chapter form explaining how to use :app:`Pyramid`.
    narr/zca
 
 
-API Documentation
+API документация
 =================
 
-Comprehensive reference material for every public API exposed by
+Всесторонний справочный материал для каждого публичного API exposed by
 :app:`Pyramid`:
 
 .. toctree::
